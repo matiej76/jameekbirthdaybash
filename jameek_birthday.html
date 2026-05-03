@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy 18th Birthday Jameek Mitchell!</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      animation: bgFlash 2s steps(1) infinite;
+      position: relative;
+    }
+
+    @keyframes bgFlash {
+      0%, 49.9% { background-color: #00f0ff; }
+      50%, 100% { background-color: #39ff14; }
+    }
+
+    /* confetti canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* main content */
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 180px);
+      padding: 40px 20px 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    h1 {
+      font-size: 50px;
+      font-weight: bold;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      text-align: center;
+      color: #fff;
+      text-shadow:
+        0 0 10px #ff00ff,
+        0 0 25px #ff00ff,
+        0 0 50px #ff00ff,
+        4px 4px 0px #7700bb;
+      margin-bottom: 44px;
+      letter-spacing: 2px;
+      animation: titlePulse 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes titlePulse {
+      from { transform: scale(1);    text-shadow: 0 0 10px #ff00ff, 0 0 25px #ff00ff, 0 0 50px #ff00ff, 4px 4px 0 #7700bb; }
+      to   { transform: scale(1.05); text-shadow: 0 0 20px #ff00ff, 0 0 50px #ff00ff, 0 0 90px #ff00ff, 4px 4px 0 #7700bb; }
+    }
+
+    .poem-card {
+      background: rgba(0, 0, 0, 0.50);
+      border: 3px solid rgba(255, 255, 255, 0.70);
+      border-radius: 22px;
+      padding: 38px 48px;
+      max-width: 660px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow:
+        0 0 30px rgba(255, 0, 255, 0.55),
+        0 0 70px rgba(0, 240, 255, 0.30);
+    }
+
+    .poem-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffe600;
+      text-shadow: 0 0 10px #ff9900, 0 0 20px #ff6600;
+      margin-bottom: 26px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    .poem-card p {
+      font-size: 17px;
+      line-height: 2.1;
+      color: #f5f5f5;
+      font-style: italic;
+    }
+
+    .poem-card p span { display: block; }
+
+    /* party popper */
+    .party-popper {
+      position: fixed;
+      bottom: 185px;
+      right: 22px;
+      width: 120px;
+      z-index: 9999;
+      pointer-events: none;
+      filter: drop-shadow(0 0 14px #ff00ff);
+      animation: popperBounce 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes popperBounce {
+      from { transform: rotate(-8deg) scale(1); }
+      to   { transform: rotate(8deg)  scale(1.12); }
+    }
+
+    /* scrolling image strip */
+    .scroll-strip {
+      width: 100%;
+      overflow: hidden;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 50;
+      padding: 10px 0;
+      background: rgba(0, 0, 0, 0.30);
+      border-top: 3px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .scroll-track {
+      display: flex;
+      gap: 24px;
+      animation: scrollLeft 20s linear infinite;
+      width: max-content;
+    }
+
+    .scroll-track img {
+      height: 140px;
+      width: auto;
+      border-radius: 12px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 18px rgba(255, 0, 255, 0.75);
+      flex-shrink: 0;
+    }
+
+    @keyframes scrollLeft {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="content">
+    <h1>🎉 Happy 18th Birthday Jameek Mitchell! 🎉</h1>
+
+    <div class="poem-card">
+      <div class="poem-title">✨ A Poem for Our Boy Jameek ✨</div>
+      <p>
+        <span>Eighteen years of laughs, of growth, of grind,</span>
+        <span>A one-of-a-kind soul that's hard to find.</span>
+        <span>From every moment shared, every inside joke,</span>
+        <span>You're the friend who keeps it real and never broke.</span>
+        <span>&nbsp;</span>
+        <span>Through the good days, the wild days, and all the rest,</span>
+        <span>Jameek, you always gave us nothing but your best.</span>
+        <span>Today you step into adulthood, bold and free —</span>
+        <span>The world better watch out, 'cause you hold the key.</span>
+        <span>&nbsp;</span>
+        <span>So here's to you, our boy, our brother, our friend,</span>
+        <span>May this chapter be the start that never ends.</span>
+        <span>Happy 18th, Jameek — it's your time to shine,</span>
+        <span>Everything ahead of you is by design. 🌟</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Scrolling strip -->
+  <div class="scroll-strip">
+    <div class="scroll-track" id="scrollTrack"></div>
+  </div>
+
+  <!-- Party popper GIF overlaying everything -->
+  <img
+    class="party-popper"
+    src="https://media.giphy.com/media/g9582DNuQppxC/giphy.gif"
+    alt="Party Popper"
+  />
+
+  <script>
+    // ── Build scrolling image strip (12 copies for seamless loop) ────────
+    const track = document.getElementById('scrollTrack');
+    for (let i = 0; i < 12; i++) {
+      const img = document.createElement('img');
+      img.src = 'jameek.png';
+      img.alt = 'Jameek';
+      track.appendChild(img);
+    }
+
+    // ── Confetti engine ──────────────────────────────────────────────────
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx    = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const COLORS = [
+      '#ff00ff','#00f0ff','#39ff14','#ffe600',
+      '#ff4500','#ffffff','#ff69b4','#7700ff'
+    ];
+
+    class Particle {
+      constructor(initial) {
+        this.x     = Math.random() * canvas.width;
+        this.y     = initial ? Math.random() * canvas.height : -20;
+        this.w     = Math.random() * 10 + 5;
+        this.h     = Math.random() * 6  + 3;
+        this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        this.vx    = (Math.random() - 0.5) * 3;
+        this.vy    = Math.random() * 3 + 1.5;
+        this.angle = Math.random() * Math.PI * 2;
+        this.spin  = (Math.random() - 0.5) * 0.18;
+      }
+      update() {
+        this.x     += this.vx;
+        this.y     += this.vy;
+        this.angle += this.spin;
+        if (this.y > canvas.height + 20) {
+          this.y = -20;
+          this.x = Math.random() * canvas.width;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.fillStyle = this.color;
+        ctx.fillRect(-this.w / 2, -this.h / 2, this.w, this.h);
+        ctx.restore();
+      }
+    }
+
+    let particles = [];
+
+    // initial spread
+    for (let i = 0; i < 150; i++) particles.push(new Particle(true));
+
+    // burst of new confetti every 2 seconds
+    setInterval(() => {
+      for (let i = 0; i < 80; i++) {
+        particles.push(new Particle(false));
+      }
+      // cap total
+      if (particles.length > 500) particles.splice(0, particles.length - 500);
+    }, 2000);
+
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+
+  <!-- ── Disco Ball Cursor ───────────────────────────────────────────── -->
+  <canvas id="disco-cursor" style="
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 999999;
+    width: 48px; height: 48px;
+  " width="48" height="48"></canvas>
+
+  <script>
+    const dc   = document.getElementById('disco-cursor');
+    const dctx = dc.getContext('2d');
+    const SIZE = 48;
+    const R    = 18;
+    let mx = -100, my = -100;
+    let shimmer = 0;
+
+    // Disco ball tile colors — sparkly multi-color squares
+    const TILES = [
+      '#ff00ff','#00f0ff','#ffffff','#ffe600',
+      '#ff4500','#39ff14','#ff69b4','#7700ff',
+      '#00ffaa','#ff0055','#aaff00','#00aaff'
+    ];
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX;
+      my = e.clientY;
+      dc.style.transform = `translate(${mx - SIZE/2}px, ${my - SIZE/2}px)`;
+    });
+
+    function drawDiscoBall() {
+      dctx.clearRect(0, 0, SIZE, SIZE);
+      shimmer = (shimmer + 0.07) % (Math.PI * 2);
+
+      const cx = SIZE / 2, cy = SIZE / 2;
+
+      // Shadow
+      dctx.beginPath();
+      dctx.arc(cx + 2, cy + 2, R, 0, Math.PI * 2);
+      dctx.fillStyle = 'rgba(0,0,0,0.35)';
+      dctx.fill();
+
+      // Clip to circle
+      dctx.save();
+      dctx.beginPath();
+      dctx.arc(cx, cy, R, 0, Math.PI * 2);
+      dctx.clip();
+
+      // Base sphere gradient
+      const grad = dctx.createRadialGradient(cx - 5, cy - 6, 2, cx, cy, R);
+      grad.addColorStop(0, '#e0e0e0');
+      grad.addColorStop(0.5, '#888');
+      grad.addColorStop(1, '#222');
+      dctx.fillStyle = grad;
+      dctx.fillRect(0, 0, SIZE, SIZE);
+
+      // Draw disco tiles
+      const tileSize = 6;
+      const rows = 7, cols = 7;
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const tx = cx - R + col * tileSize + 1;
+          const ty = cy - R + row * tileSize + 1;
+          // Only draw tiles inside the circle
+          const dx2 = tx + tileSize/2 - cx;
+          const dy2 = ty + tileSize/2 - cy;
+          if (Math.sqrt(dx2*dx2 + dy2*dy2) > R - 2) continue;
+
+          // Cycle color based on position + shimmer time
+          const idx = (row * cols + col + Math.floor(shimmer * 3)) % TILES.length;
+          dctx.fillStyle = TILES[idx];
+          dctx.globalAlpha = 0.55 + 0.45 * Math.sin(shimmer + row * 0.9 + col * 0.7);
+          dctx.fillRect(tx, ty, tileSize - 1, tileSize - 1);
+          dctx.globalAlpha = 1;
+        }
+      }
+
+      // Highlight glint
+      const glint = dctx.createRadialGradient(cx - 6, cy - 7, 1, cx - 4, cy - 5, 9);
+      glint.addColorStop(0, 'rgba(255,255,255,0.9)');
+      glint.addColorStop(1, 'rgba(255,255,255,0)');
+      dctx.fillStyle = glint;
+      dctx.fillRect(0, 0, SIZE, SIZE);
+
+      dctx.restore();
+
+      // Outer ring
+      dctx.beginPath();
+      dctx.arc(cx, cy, R, 0, Math.PI * 2);
+      dctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      dctx.lineWidth = 1.2;
+      dctx.stroke();
+
+      // Sparkle rays shooting out
+      const sparkCount = 6;
+      for (let s = 0; s < sparkCount; s++) {
+        const angle = shimmer * 2 + (s / sparkCount) * Math.PI * 2;
+        const sx1 = cx + Math.cos(angle) * (R + 1);
+        const sy1 = cy + Math.sin(angle) * (R + 1);
+        const sx2 = cx + Math.cos(angle) * (R + 7 + 3 * Math.sin(shimmer * 3 + s));
+        const sy2 = cy + Math.sin(angle) * (R + 7 + 3 * Math.sin(shimmer * 3 + s));
+        dctx.beginPath();
+        dctx.moveTo(sx1, sy1);
+        dctx.lineTo(sx2, sy2);
+        dctx.strokeStyle = TILES[s % TILES.length];
+        dctx.lineWidth = 1.5;
+        dctx.globalAlpha = 0.8;
+        dctx.stroke();
+        dctx.globalAlpha = 1;
+      }
+
+      requestAnimationFrame(drawDiscoBall);
+    }
+    drawDiscoBall();
+  </script>
+</body>
+</html>
